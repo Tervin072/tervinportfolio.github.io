@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pheeha Mothemane Software Developer</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-B3...your-sha-here" crossorigin="anonymous" />
+    
+    <script>
+        function addSkill(skill, description) {
+            fetch('/skills', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ skill_name: skill, description: description })
+            })
+            .then(response => response.text())
+            .then(data => console.log(data));
+        }
+    
+        function getSkills() {
+            fetch('/skills')
+            .then(response => response.json())
+            .then(data => console.log(data));
+        }
+    
+        function updateSkill(id, skill, description) {
+            fetch(`/skills/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ skill_name: skill, description: description })
+            })
+            .then(response => response.text())
+            .then(data => console.log(data));
+        }
+    
+        function deleteSkill(id) {
+            fetch(`/skills/${id}`, {
+                method: 'DELETE'
+            })
+            .then(response => response.text())
+            .then(data => console.log(data));
+        }
+    </script>
+</head>
+<body>
+<div id="header">
+    <div class="container">
+        <nav>
+            <img src="images/logo.png" class="logo">
+            <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="cv_management.html">CV Management</a></li>
+                <i class="fas fa-times" onclick="closemenu()"></i>
+            </ul>
+            <i class="fas fa-bars" onclick="openmenu()"></i>
+        </nav>
+        <div class="header-text">
+            <p>Software Developer</p>
+            <h1>Hi, I'm <span>Pheeha</span><br>Mothemane From South Africa</h1>
+        </div>
+    </div>
+</div>
+<!-- -----------about---------- -->
+<div id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img src="images/user.jpg">
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p>I'm a dedicated student currently pursuing a BSc in Mathematical Sciences, specializing in Computer Science and
+                Statistics at the University of Limpopo. In my first year of study, I'm driven by an insatiable curiosity to explore
+                the dynamic intersection of technology and data.</p>
+                <br>
+                <p>🖥️ Technical Aspirations:<br>
+                My academic journey has introduced me to the exciting realms of Computer Science and Statistics. I have a keen interest
+                in Python and C++ programming. Beyond that, I'm deeply enthusiastic about the ever-evolving field of Cyber Security.</p>
+                <br>
+                <p>📚 Continuous Learning:<br>
+                Committed to continuous learning and growth, I actively engage in online courses and practical projects to enhance my
+                skills in Python and Cyber Security.</p>
+                <br>
+                <p>🌟 Future Goals:<br>
+                My vision is to harness my knowledge and skills to make a significant impact in the tech industry. I'm determined to
+                create innovative solutions, secure digital landscapes, and push boundaries. I aspire to explore roles such as Software Developer, with a long-term ambition to establish my own
+                technology company. My focus will be on Security Solutions, as
+                well as Secure Software Development, with a mission to detect vulnerabilities and address security issues early in the
+                development process.</p>
+
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Python</span><br>OOP, Numpy and Matplotlib</li>
+                        <li><span>C++</span><br>OOP and Data Structures and Algorithms</li>
+                        
+                        <li><span>Cyber Security</span><br>Networking, Penetration Testing and Security Fundementals</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="experience">
+                   <!-- <ul>
+                        <li><span>2021 - Current</span><br>UI/UX Design Training at ET Institute</li>
+                        <li><span>2019 - 2021</span><br>Team lead at StarApp LLC.</li>
+                        <li><span>2017 - 2019</span><br>UI/UX Design Executive at Coin Digital Ltd.</li>
+                        <li><span>2016 - 2017</span><br>Internship at ekart eCommerce.</li>
+                    </ul> -->
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2024</span><br>BSc Mathematical Science majoring in Computer Science and Statistics at University of Limpopo.</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ---------services---------------- -->
+<div id="services">
+    <div class="container">
+        <h1 class="sub-title">My Services</h1>
+        <div class="services-list">
+            <div>
+                <i class="fas fa-bars"></i>
+                <h2>Penetration Testing</h2>
+                <p>Initiate a simulated cyberattack against your organization's systems, networks, or applications to identify vulnerabilities
+                that malicious attackers could exploit. This service is essential for businesses to understand their security posture
+                and protect sensitive data.</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fas fa-code"></i>
+                <h2>Web Design</h2>
+                <p>Focuses on creating visually appealing, user-friendly, and responsive websites that effectively represent your brand and
+                engage your target audience. We combine creative design with modern technology to deliver a seamless online experience
+                that enhances your business presence and drives conversions</p>
+                <a href="#">Learn more</a>
+            </div>
+            <div>
+                <i class="fab fa-app-store"></i>
+                <h2>System Security Design</h2>
+                <p>Dedicated to creating robust, secure infrastructures that protect your organization's assets against cyber threats. We
+                design comprehensive security architectures that align with your business objectives and regulatory requirements,
+                ensuring that your systems are resilient against potential attacks.</p>
+                <a href="#">Learn more</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ----------portfolio------------ -->
+<div id="portfolio">
+    <div class="container">
+        <h1 class="sub-title">My Work</h1>
+        <div class="work-list">
+            <div class="work">
+                <img src="images/Smarthome.jpg">
+                <div class="layer">
+                    <h3>Smart Home Automation System</h3>
+                    <li>Python: Developed backend scripts for controlling smart home devices, integrating with IoT platforms, and handling communication
+                    protocols</li>
+                    <li>C++: Wrote firmware for microcontrollers that control sensors, actuators, and
+                    other hardware components.</li>
+                    
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/healthmon.jpg">
+                <div class="layer">
+                    <h3>Health Monitoring System</h3>
+                    <li>Python: Wrote scripts to analyze patient data, predict health trends, and generate alerts. Use machine learning models to
+                    provide insights from wearable data.</li>
+                    <li>C++: Develop the firmware for wearable health devices to collect and transmit
+                    data efficiently.</li>
+                    
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            <div class="work">
+                <img src="images/ecom.jpg">
+                <div class="layer">
+                    <h3>E-commerce Platform</h3>
+                    <li>Python: Use Django or Flask for backend development.</li>
+                    <li>C++: Optimize performance-critical components, such as inventory management, search algorithms, or processing large datasets.</li>
+                    <li>Web Design: Designed a responsive, user-friendly e-commerce front-end with dynamic product displays, shopping carts, and
+                    payment integration.</li>
+                    <a href="#"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+            
+            
+        </div>
+        <a href="#" class="btn">See more</a>
+    </div>
+</div>
+<!-- ----------contact------------- -->
+<div id="contact">
+    <head>
+        <!-- Other head elements -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    </head>
+    <div class="container">
+        <div class="row">
+            <div class="contact-left">
+                <h1 class="sub-title">Contact Me</h1>
+                <p><i class="fas fa-paper-plane"></i> tervinpheeha@gmail.com</p>
+                <p><i class="fas fa-phone-square-alt"></i> +27 72 743 9630</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com/"><i class="fab fa-facebook"></i></a>
+                    <a href="https://x.com/"><i class="fab fa-twitter-square"></i></a>
+                    <a href="https://wa.me/+27727439630" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://za.linkedin.com/"><i class="fab fa-linkedin"></i></a>
+                </div>
+                
+                <a href="images/my-cv.pdf" download class="btn btn2">Download CV</a>
+            </div>
+            <div class="contact-right">
+                <form name="submit-to-google-sheet">
+                    <input type="text" name="Name" placeholder="Your Name" required>
+                    <input type="email" name="Email" placeholder="Your Email" required>
+                    <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                    <button type="submit" class="btn btn2">Submit</button>
+                </form>
+                <span id="msg"></span>
+            </div>
+        </div>
+    </div>
+    <!--<script>
+    // Function to add a new skill
+    function addSkill(skill, description) {
+        fetch('/skills', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ skill_name: skill, description: description })
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            fetchSkills(); // Refresh the list of skills
+        });
+    }
+
+    // Function to fetch and display skills
+    function fetchSkills() {
+        fetch('/skills')
+        .then(response => response.json())
+        .then(data => {
+            const skillsList = document.getElementById('skillsList');
+            skillsList.innerHTML = '';
+            data.forEach(skill => {
+                const li = document.createElement('li');
+                li.textContent = `${skill.skill_name}: ${skill.description}`;
+                skillsList.appendChild(li);
+            });
+        });
+    }
+
+    // Function to update a skill
+    function updateSkill(id, skill, description) {
+        fetch(`/skills/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ skill_name: skill, description: description })
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            fetchSkills(); // Refresh the list of skills
+        });
+    }
+
+    // Function to delete a skill
+    function deleteSkill(id) {
+        fetch(`/skills/${id}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+            fetchSkills(); // Refresh the list of skills
+        });
+    }
+
+    // Fetch skills on page load
+    document.addEventListener('DOMContentLoaded', fetchSkills);
+</script>
+<head>
+    
+    <title>CV Management</title>
+</head>
+<body>
+    <div id="cv-management">
+        <div class="container">
+            <div class="row">
+                <div class="cv-left">
+                    <h1 class="sub-title">CV Management</h1>
+                    
+                    <form id="addSkillForm">
+                        <input type="text" id="skillName" placeholder="Skill Name" required>
+                        
+                        <input type="text" id="skillDescription" rows="5" placeholder="Description" required>
+                        <button type="submit" class="btn btn2">Add Skill</button>
+                    </form>
+                    <ul id="skillsList"></ul>
+                </div>
+                <div class="cv-right">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new skill
+        document.getElementById('addSkillForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const skillName = document.getElementById('skillName').value;
+            const skillDescription = document.getElementById('skillDescription').value;
+
+            fetch('/skills', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ skill_name: skillName, description: skillDescription })
+            })
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                fetchSkills(); // Refresh the list of skills
+            });
+        });
+
+        // Function to fetch and display skills
+        function fetchSkills() {
+            fetch('/skills')
+            .then(response => response.json())
+            .then(data => {
+                const skillsList = document.getElementById('skillsList');
+                skillsList.innerHTML = '';
+                data.forEach(skill => {
+                    const li = document.createElement('li');
+                    li.textContent = `${skill.skill_name}: ${skill.description}`;
+                    skillsList.appendChild(li);
+                });
+            });
+        }
+
+        // Fetch skills on page load
+        document.addEventListener('DOMContentLoaded', fetchSkills);
+    </script>-->
+    
+   
+</body>
+</html>
+    
+        <div class="copyright">
+            <p>
+                Copyright © Black Delta.
+                <a href="https://github.com/D4RK-M3TA" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://x.com/TebelloMoloto16" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                <a href="www.linkedin.com/in/tebello-moloto-585b7020a" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://wa.me/+27683572983" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </p>
+    </div>
+</div>
+
+
+
+<script>
+
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+
+    function opentab(tabname){
+        for(tablink of tablinks){
+            tablink.classList.remove("active-link");
+        }
+        for(tabcontent of tabcontents){
+            tabcontent.classList.remove("active-tab");
+        }
+        event.currentTarget.classList.add("active-link");
+        document.getElementById(tabname).classList.add("active-tab");
+    }
+
+</script>
+
+<script>
+
+    var sidemeu = document.getElementById("sidemenu");
+
+    function openmenu(){
+        sidemeu.style.right = "0";
+    }
+    function closemenu(){
+        sidemeu.style.right = "-200px";
+    }
+
+</script>
+<script>
+    const scriptURL = '< add you own link here >' // add your own app script link here
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Message sent successfully"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },5000)
+            form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+</html>

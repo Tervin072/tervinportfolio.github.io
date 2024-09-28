@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css"> <!-- Include the common stylesheet -->
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <img src="images/logo.png" class="logo">
+                <ul id="sidemenu">
+                    <li><a href="index.html#header">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                    <i class="fas fa-times" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-bars" onclick="openmenu()"></i>
+            </nav>
+            
+            <div class="header-text">
+                <h1></h1>
+                
+    </div>
+
+    <div id="cv-management">
+        <div class="container">
+            <div class="row">
+                <div class="cv-left">
+                    <h1 class="sub-title">CV Management</h1>
+                    <!-- Form to add a new skill -->
+                    <form id="addSkillForm">
+                        <input type="text" id="skillName" placeholder="Skill Name" required>
+                        <input type="text" id="skillDescription" placeholder="Description" required>
+                        <button type="submit" class="btn btn2">Add Skill</button>
+                    </form>
+                    <ul id="skillsList"></ul>
+                </div>
+                <div class="cv-right">
+                    <!-- Form to update a skill -->
+                    <form id="updateSkillForm">
+                        <input type="hidden" id="updateSkillId">
+                        <input type="text" id="updateSkillName" placeholder="Updated Skill Name" required>
+                        <input type="text" id="updateSkillDescription" placeholder="Updated Description" required>
+                        <button type="submit" class="btn btn2">Update Skill</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Function to add a new skill
+        document.getElementById('addSkillForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const skillName = document.getElementById('skillName').value;
+            const skillDescription = document.getElementById('skillDescription').value;
+
+            fetch('/skills', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ skill_name: skillName, description: skillDescription })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    fetchSkills(); // Refresh the list of skills
+                });
+        });
+
+        // Function to fetch and display skills
+        function fetchSkills() {
+            fetch('/skills')
+                .then(response => response.json())
+                .then(data => {
+                    const skillsList = document.getElementById('skillsList');
+                    skillsList.innerHTML = '';
+                    data.forEach(skill => {
+                        const li = document.createElement('li');
+                        li.textContent = `${skill.skill_name}: ${skill.description}`;
+
+                        // Add delete button
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.classList.add('btn', 'btn2');
+                        deleteButton.addEventListener('click', () => deleteSkill(skill.id));
+                        li.appendChild(deleteButton);
+
+                        // Add click event to populate update form
+                        li.addEventListener('click', () => populateUpdateForm(skill));
+                        skillsList.appendChild(li);
+                    });
+                });
+        }
+
+        // Function to populate the update form with the selected skill data
+        function populateUpdateForm(skill) {
+            document.getElementById('updateSkillId').value = skill.id;
+            document.getElementById('updateSkillName').value = skill.skill_name;
+            document.getElementById('updateSkillDescription').value = skill.description;
+        }
+
+        // Function to update a skill
+        document.getElementById('updateSkillForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            const skillId = document.getElementById('updateSkillId').value;
+            const skillName = document.getElementById('updateSkillName').value;
+            const skillDescription = document.getElementById('updateSkillDescription').value;
+
+            fetch(`/skills/${skillId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ skill_name: skillName, description: skillDescription })
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    fetchSkills(); // Refresh the list of skills
+                });
+        });
+
+        // Function to delete a skill
+        function deleteSkill(skillId) {
+            fetch(`/skills/${skillId}`, {
+                method: 'DELETE'
+            })
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    fetchSkills(); // Refresh the list of skills
+                });
+        }
+
+        // Fetch skills on page load
+        document.addEventListener('DOMContentLoaded', fetchSkills);
+    </script>
+</body>
+
+</html>
